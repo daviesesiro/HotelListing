@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelListing.API.Repository;
 
-public class GenericRepository<T> : IGenericRespository<T> where T: class
+public class GenericRepository<T> : IGenericRepository<T> where T: class
 {
     private readonly HotelListingContext _context;
 

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+
 namespace HotelListing.API.Data;
 
 public class HotelListingContext : DbContext
@@ -10,7 +11,7 @@ public class HotelListingContext : DbContext
     public DbSet<Hotel> Hotels { get; set; }
     public DbSet<Country> Countries { get; set; }
 
-    override protected void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Country>().HasData(
@@ -27,7 +28,4 @@ public class HotelListingContext : DbContext
             new Hotel { Id = 5, Name = "Four Seasons", Address = "Agege", Rating = 4.0, CountryId = 3 }
         );
     }
-
-
 }
-
