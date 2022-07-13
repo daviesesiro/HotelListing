@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: HotelListing.API/Dockerfile
+run:
+  web: dotnet HotelListing.API.dll
