@@ -4,6 +4,7 @@ using HotelListing.API.Data;
 using HotelListing.API.Models.Hotel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelListing.API.Controllers;
@@ -25,6 +26,7 @@ public class HotelsController : ControllerBase
 
     // GET: api/Hotels
     [HttpGet]
+
     public async Task<ActionResult<IEnumerable<HotelDto>>> GetHotels()
     {
         var hotels = await _hotelsRepository.GetAllAsync();

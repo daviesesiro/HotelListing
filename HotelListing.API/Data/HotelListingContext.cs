@@ -1,3 +1,4 @@
+using System.Reflection;
 using HotelListing.API.Data.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -18,9 +19,7 @@ public class HotelListingContext : IdentityDbContext<ApiUser, IdentityRole<Guid>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfiguration(new RoleConfigurations());
-        modelBuilder.ApplyConfiguration(new CountryConfigurations());
-        modelBuilder.ApplyConfiguration(new HotelConfigurations());
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         modelBuilder.Entity<ApiUser>().ToTable("users");
         modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claims");
@@ -28,5 +27,6 @@ public class HotelListingContext : IdentityDbContext<ApiUser, IdentityRole<Guid>
         modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("user_claims");
         modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("user_logins");
         modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("user_tokens");
+
     }
 }

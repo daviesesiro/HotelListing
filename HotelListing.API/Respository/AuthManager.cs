@@ -93,9 +93,9 @@ public class AuthManager : IAuthManager
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        var userClaims = await _userManager.GetClaimsAsync(user);
         var roleClaims = (await _userManager.GetRolesAsync(user))
             .Select(x => new Claim(ClaimTypes.Role, x)).ToList();
-        var userClaims = await _userManager.GetClaimsAsync(user);
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, user.Email),
