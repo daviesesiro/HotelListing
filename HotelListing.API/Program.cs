@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Net;
+using System.Reflection;
 using System.Text;
 using HotelListing.API.Configurations;
 using HotelListing.API.Contracts;
@@ -80,6 +81,11 @@ builder.Services.AddResponseCaching(opt =>
 {
     opt.MaximumBodySize = 1024;
     opt.UseCaseSensitivePaths = true;
+});
+
+builder.WebHost.ConfigureKestrel(opt =>
+{
+    opt.Listen(IPAddress.Any, Convert.ToInt32(Environment.GetEnvironmentVariable("PORT")));
 });
 
 var app = builder.Build();
